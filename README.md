@@ -6,5 +6,4 @@ This plugin sends a notification to a specified notification channel whenever th
 
 - Monitors SSH login events in real-time.
 - Sends notifications with relevant login details.
-- Configurable notification channel.
-- Configurable per server.
+- Configurable notification channel per server.
