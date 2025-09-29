@@ -8,6 +8,7 @@ use App\Models\Server;
 use App\Vito\Plugins\Flowan\VitoSshLoginNotification\Notifications\ServerSshLogin;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SshLoginNotificationController extends Controller
 {
@@ -23,9 +24,9 @@ class SshLoginNotificationController extends Controller
             $notificationChannel = NotificationChannel::query()->findOrFail($server->feature_data['ssh_login_notification_channel']);
             $notificationChannel->notify(new ServerSshLogin(
                 $server,
-                $request->input('user'),
-                $request->input('ip'),
-                $request->input('date')
+                $request->json('user'),
+                Str::replace('_', '.', $request->json('ip')),
+                now(),
             ));
         }
 

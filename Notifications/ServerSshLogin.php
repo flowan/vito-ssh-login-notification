@@ -4,6 +4,7 @@ namespace App\Vito\Plugins\Flowan\VitoSshLoginNotification\Notifications;
 
 use App\Models\Server;
 use App\Notifications\AbstractNotification;
+use Carbon\CarbonInterface;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class ServerSshLogin extends AbstractNotification
@@ -12,7 +13,7 @@ class ServerSshLogin extends AbstractNotification
         protected Server $server,
         protected string $user,
         protected string $ip,
-        protected string $date,
+        protected CarbonInterface $date,
     ) {}
 
     public function rawText(): string

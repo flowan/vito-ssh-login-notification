@@ -6,6 +6,7 @@ use App\Plugins\AbstractPlugin;
 use App\Plugins\RegisterServerFeature;
 use App\Plugins\RegisterServerFeatureAction;
 use App\Plugins\RegisterViews;
+use App\Vito\Plugins\Flowan\VitoSshLoginNotification\Actions\Disable;
 use App\Vito\Plugins\Flowan\VitoSshLoginNotification\Actions\Enable;
 use App\Vito\Plugins\Flowan\VitoSshLoginNotification\Http\Controllers\Webhook\SshLoginNotificationController;
 use Illuminate\Support\Facades\Route;
@@ -31,8 +32,11 @@ class Plugin extends AbstractPlugin
             ->label('Enable')
             ->handler(Enable::class)
             ->register();
+        RegisterServerFeatureAction::make('ssh-login-notification', 'disable')
+            ->label('Disable')
+            ->handler(Disable::class)
+            ->register();
 
-        Route::post('webhook/ssh-login-notification/{server}', SshLoginNotificationController::class)
-            ->name('webhook.ssh-login-notification');
+        Route::post('webhook/ssh-login-notification/{server}', SshLoginNotificationController::class);
     }
 }

@@ -48,7 +48,10 @@ class Enable extends Action
         $token = Str::random(32);
 
         $this->server->ssh()->exec(
-            view('vito-ssh-login-notification::enable', ['server' => $this->server->id, 'token' => $token]),
+            view('vito-ssh-login-notification::enable', [
+                'url' => url("webhook/ssh-login-notification/{$this->server->id}"),
+                'token' => $token,
+            ]),
             'enable-ssh-login-notification',
         );
 
